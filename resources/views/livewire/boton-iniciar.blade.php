@@ -1,0 +1,1 @@
+<button class="rounded-none py-1 px-5 bg-emerald-300  outline outline-offset-2 outline-2 ">Iniciar Sesion</button>

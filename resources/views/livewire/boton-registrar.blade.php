@@ -1,0 +1,1 @@
+<button class="rounded-none px-5 py-1 bg-emerald-300  outline outline-offset-2 outline-2 ">Registrarse</button>
