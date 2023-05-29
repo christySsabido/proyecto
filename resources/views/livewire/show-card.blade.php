@@ -30,6 +30,36 @@
                     <div class="bg-white rounded-lg shadow-md p-4">
                         <p class="text-gray-700 text-sm">{{ $comentario->contenido }}</p>
                         <p class="text-gray-500 text-xs mt-1">Usuario: {{ $comentario->usuario->name ?? 'Usuario desconocido' }}</p>
+                         @if(Auth::id() === $comentario->user_id)
+                            <button class="btn-editar-comentario" data-comentario-id="{{ $comentario->id }}">Editar</button>
+                            <button class="btn-confirmar-eliminacion" data-comentario-id="{{ $comentario->id }}">Eliminar</button>
+                            <div class="modal" id="modalEditarComentario-{{ $comentario->id }}" style="display: none;">
+                                <div class="modal-content">
+                                    <h3>Editar Comentario</h3>
+                                    <form action="/nota/{{ $nota->id }}/comentarios/{{ $comentario->id }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <textarea name="contenido" class="w-full rounded" id="contenidoComentario-{{ $comentario->id }}"></textarea>
+                                        <button type="submit">Guardar</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="fixed inset-0 flex items-center justify-center z-50 hidden" id="modalEditarComentario-{{ $comentario->id }}">
+                                <!-- Formulario de edición de comentario -->
+                            </div>
+                            <div class="fixed inset-x-0 bottom-16 flex items-center justify-center z-50 hidden" id="modalConfirmarEliminacion-{{ $comentario->id }}">
+                                <div class="bg-white rounded-lg p-4 shadow-lg w-64">
+                                    <h3 class="text-xl font-bold mb-2">Confirmar Eliminación</h3>
+                                    <p class="text-gray-700 mb-4">¿Estás seguro de que deseas eliminar este comentario?</p>
+                                    <form action="/nota/{{ $nota->id }}/comentarios/{{ $comentario->id }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none">Eliminar</button>
+                                        <button type="button" class="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500 focus:outline-none ml-2" id="btnCancelarEliminacion-{{ $comentario->id }}">Cancelar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             </div>
@@ -81,4 +111,3 @@
         comentariosContainer.scrollTop(comentariosContainer.prop('scrollHeight'));
     });
 </script>
-
