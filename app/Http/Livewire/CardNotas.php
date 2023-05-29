@@ -6,12 +6,16 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Nota;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Comentario;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 class CardNotas extends Component
 {
     use WithPagination;
     public $selectedNoteId; // Variable para almacenar el ID de la nota seleccionada
     public $expandedNoteId; // Variable para almacenar el ID de la nota expandida
+    public $comentarioContenido = '';
+    public $comentarioModal = false;
 
     public function render()
     {
@@ -21,7 +25,10 @@ class CardNotas extends Component
             'notas' => $notas
         ]);
     }
-
+    public function irAPaginaNota($notaId)
+{
+    return Redirect::to('/nota/' . $notaId . '#comentarios');
+}
 
     public function eliminarNota($notaId)
     {

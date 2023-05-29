@@ -32,8 +32,8 @@
             {{ __('Saved.') }}
         </x-action-message>
 
-        <button class="rounded-none py-1 px-5 bg-blue-300  outline outline-offset-2 outline-2">
-            {{ __('Cambiar') }}
-        </button>
+        <x-button>
+            {{ __('Save') }}
+        </x-button>
     </x-slot>
 </x-form-section>

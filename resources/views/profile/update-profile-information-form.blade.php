@@ -43,8 +43,8 @@
             {{ __('Guardar.') }}
         </x-action-message>
 
-        <button class="rounded-none py-1 px-5 bg-blue-300  outline outline-offset-2 outline-2" wire:loading.attr="disabled" wire:target="photo">
-            {{ __('Guardar') }}
-        </button>
+        <x-button wire:loading.attr="disabled" wire:target="photo">
+            {{ __('Save') }}
+        </x-button>
     </x-slot>
 </x-form-section>
